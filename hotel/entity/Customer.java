@@ -1,46 +1,51 @@
 package chapter2.hotel.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.stream.Stream;
 
 public class Customer {
-    private String id;
-    private String name;
-    private String phoneNum;
-    private float wallet;
+    private String name;        // 고객 명
+    private String phoneNum;    // 고객 전화번호
+    private float wallet;       // 고객 보유 소지금
+    private HashMap<String, Reservation> reservations;
+    // 고객 예약 목록 key = uuid, value = Reservation
 
-    private List<Reservation> reservationList;
-
-    private Room room;
-    public Customer(){
-        reservationList = new ArrayList<>();
-        room = new Room();
-    }
-    public Customer(String id, String name, String phoneNum, float wallet){
-        this.id = id;
+    public Customer(String name, String phoneNum, float wallet) {
         this.name = name;
         this.phoneNum = phoneNum;
         this.wallet = wallet;
+        this.reservations = new HashMap<>();
     }
 
-    public String reserve(){
-        // 호텔 예약하기(예약번호 반환)
-        id = UUID.randomUUID().toString();
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void checkReserve(int id){
-        // 예약 번호(id)로 예약 내역 조회
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void cancelReserve(int id){
-        // 예약 번호(id)로 예약 내역 취소
+    public float getWallet() {
+        return wallet;
     }
 
-    public void minusWallet(){
-        // 숙박비를 제외한 소지금
-//        wallet -= room.getRoom();
+    public HashMap<String, Reservation> getReservations() { return reservations; }
+
+    public void setWallet(float wallet) {
+        this.wallet = wallet;
     }
 
+    public void addReservation(String uuid, Reservation reservation){
+        reservations.put(uuid, reservation);
+    }
+
+    // 2. 예약 확인하기 -- 고객의 예약 정보 전부 출력하기 (구현)
+    public void displayReservations() {
+        // HashMap인 reservations의 요소 하나하나를 keySet()을 통한 for문
+        // 혹은 entrySet()을 이용한 stream()으로 출력한다.
+//        for (String key : reservations.keySet()) {
+//            System.out.println(String.format("%s | %s", key, reservations.get(key).toString()));
+//        }
+        reservations.entrySet().stream().forEach(e-> System.out.println(reservations.toString()));
+    }
 }
