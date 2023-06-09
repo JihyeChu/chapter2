@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 public class Home {
     private Hotel hotel;
     private List<Customer> customers; // 고객 목록
-    // <-- HashMap<Customer, price>  customers  => key = Customer, value = price
-    // 이름, 전화번호 입력 -> customers 안에 있는지 확인해서 있으면 price랑 reservation까지 오는것.
     private Scanner sc;
 
     public Home() {
@@ -20,14 +18,17 @@ public class Home {
 
     public void start() {
         // Master , Customer 분기문
+        int choice = sc.nextInt();
+        System.out.println();
 
         while(true){
+
             Customer customer = registerCustomer();
 
             System.out.println("-----------------------");
             boolean login = true;
             while(login) {
-                int choice = displayOptions();
+                choice = displayOptions();
                 switch(choice){
                     // 예약하기
                     case 1:
@@ -161,14 +162,14 @@ public class Home {
     // 2. 예약 확인하기 (구현)
     public void checkReservation(Customer customer) {
         // 고객의 예약 목록 출력하기 (구현)
-        customer.displayReservations();
+//        customer.displayReservations();
 
         // 고객의 예약 목록(HashMap<String, Reservation>) 가져오기
         HashMap<String, Reservation> reservations = customer.getReservations();
 
         // 예약 번호(id) 입력 받기
         String uuid = getUUID(reservations);
-        if(uuid.equals("0")) return;
+//        if(uuid.equals("0")) return;
 
         // 고객의 예약 목록(reservations)에서 해당 예약 정보(Reservation)를 불러오기
         Reservation reservation = reservations.get(uuid);

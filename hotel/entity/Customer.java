@@ -43,9 +43,9 @@ public class Customer {
     public void displayReservations() {
         // HashMap인 reservations의 요소 하나하나를 keySet()을 통한 for문
         // 혹은 entrySet()을 이용한 stream()으로 출력한다.
-//        for (String key : reservations.keySet()) {
-//            System.out.println(String.format("%s | %s", key, reservations.get(key).toString()));
-//        }
-        reservations.entrySet().stream().forEach(e-> System.out.println(reservations.toString()));
+        for (String key : reservations.keySet()) {
+            System.out.println(String.format("%s | %s", key, reservations.get(key).toString()));
+        }
+//        reservations.entrySet().stream().forEach(e-> System.out.println(reservations.toString()));
     }
 }
